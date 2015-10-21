@@ -1,0 +1,5 @@
+/etc/rutorrent/config.php /usr/share/rutorrent/conf/config.php
+/etc/rutorrent/access.ini /usr/share/rutorrent/conf/access.ini
+/etc/rutorrent/plugins.ini /usr/share/rutorrent/conf/plugins.ini
+/var/lib/rutorrent/share /usr/share/rutorrent/share
+/etc/rutorrent/rtorrent.rc /var/lib/rutorrent/.rtorrent.rc

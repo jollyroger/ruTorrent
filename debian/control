@@ -1,0 +1,723 @@
+Source: rutorrent
+Section: web
+Priority: extra
+Maintainer: Andriy Senkovych <jolly_roger@itblog.org.ua>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+Homepage: http://code.google.com/p/rutorrent/
+
+Package: rutorrent
+Architecture: all
+Depends: php5, screen | dtach, rtorrent (>= 0.8.8), ${misc:Depends}
+Recommends: apache2 | lighthttpd | nginx-full | nginx-extras | cherokee
+Suggests: www-browser
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+
+Package: rutorrent-plugins-all
+Architecture: all
+Depends: rutorrent,
+         rutorrent-plugin-autotools,
+         rutorrent-plugin-check-port,
+         rutorrent-plugin-chunks,
+         rutorrent-plugin-cookies,
+         rutorrent-plugin-cpuload,
+         rutorrent-plugin-create,
+         rutorrent-plugin-data,
+         rutorrent-plugin-datadir,
+         rutorrent-plugin-diskspace,
+         rutorrent-plugin-edit,
+         rutorrent-plugin-erasedata,
+         rutorrent-plugin-extratio,
+         rutorrent-plugin-extsearch,
+         rutorrent-plugin-feeds,
+         rutorrent-plugin-filedrop,
+         rutorrent-plugin-geoip,
+         rutorrent-plugin-getdir,
+         rutorrent-plugin-history,
+         rutorrent-plugin-httprpc,
+         rutorrent-plugin-ipad,
+         rutorrent-plugin-loginmgr,
+         rutorrent-plugin-lookat,
+         rutorrent-plugin-mediainfo,
+         rutorrent-plugin-noty,
+         rutorrent-plugin-noty2,
+         rutorrent-plugin-ratio,
+         rutorrent-plugin-retrackers,
+         rutorrent-plugin-rpc,
+         rutorrent-plugin-rss,
+         rutorrent-plugin-rssurlrewrite,
+         rutorrent-plugin-rutracker-check,
+         rutorrent-plugin-scheduler,
+         rutorrent-plugin-screenshots,
+         rutorrent-plugin-seedingtime,
+         rutorrent-plugin-source,
+         rutorrent-plugin-task,
+         rutorrent-plugin-wtorrent,
+         rutorrent-plugin-source,
+         rutorrent-plugin-theme,
+         rutorrent-plugin-throttle,
+         rutorrent-plugin-tracklabels,
+         rutorrent-plugin-trafic,
+         rutorrent-plugin-unpack,
+         rutorrent-plugin-xmpp
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package installs all available plugins for rutorrent.
+
+Package: rutorrent-plugin-autotools
+Architecture: all
+Depends: rutorrent, php5-cli
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package allows to automate some operations like moving the downloaded
+ torrent to another directory, automatic label assignment and automatic torrent
+ addition from a nested set of watched directories.
+
+Package: rutorrent-plugin-check-port
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides a plugin that shows incoming port status indicator to
+ the bottom bar of the rutorrent intereface.
+
+Package: rutorrent-plugin-chunks
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides a plugin that shows the download status of torrent
+ chunks.
+
+Package: rutorrent-plugin-cookies
+Architecture: all
+Depends: rutorrent
+Recommends: php5-json
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides cookies information for authentication on trackers.
+
+Package: rutorrent-plugin-cpuload
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides a plugin that shows a CPU Load indicator to the bottom
+ bar of the rutorrent interface.
+
+Package: rutorrent-plugin-create
+Architecture: all
+Depends: rutorrent, php5-json, php5-cli, rutorrent-plugin-task
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides ability to create .torrent files.
+
+Package: rutorrent-plugin-data
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This plugin allows to copy torrent data files from the server to the client.
+
+Package: rutorrent-plugin-datadir
+Architecture: all
+Depends: rutorrent, php5-json, php5-cli
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This plugin allows to move torrent data files.
+
+Package: rutorrent-plugin-diskspace
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides a plugin that shows an easy-to-read disk meter to the
+ bottom bar of the rutorrent interface.
+
+Package: rutorrent-plugin-edit
+Architecture: all
+Depends: rutorrent, php5-json
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides a plugin that allows to edit the list of trackers and
+ change the comment field for current torrent.
+
+Package: rutorrent-plugin-erasedata
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides erasedata plugin that allows to remove both .torrent
+ file and data linked to it.
+
+Package: rutorrent-plugin-extratio
+Architecture: all
+Depends: rutorrent, php5-json, rutorrent-plugin-ratio, rutorrent-plugin-throttle
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides extratio plugin that extends the functionality of the
+ ratio plugin.
+
+Package: rutorrent-plugin-extsearch
+Architecture: all
+Depends: rutorrent, php5-json
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides extsearch plugin that allows to search many popular
+ torrent sites for content from within rutorrent.
+
+Package: rutorrent-plugin-feeds
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides feeds plugin that allows to create an RSS feed with
+ information taken from torrents.
+
+Package: rutorrent-plugin-filedrop
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides filedrop plugin that allows to add torrents using
+ drag'n'drop technique.
+
+Package: rutorrent-plugin-geoip
+Architecture: all
+Depends: rutorrent, php5-json
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides geoip plugin that shows geographic position of peers for
+ the selected torrent.
+
+Package: rutorrent-plugin-getdir
+Architecture: all
+Depends: rutorrent
+Recommends: php5-json
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides an easy navigation tools across the server's filesystem.
+
+Package: rutorrent-plugin-history
+Architecture: all
+Depends: rutorrent, php5-json, php5-cli, php5-cli
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides history plugin that is designed to log torrents history.
+
+Package: rutorrent-plugin-httprpc
+Architecture: all
+Depends: rutorrent, php5-json
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides httprpc plugin,  low-traffic replacement for the mod_scgi
+ webserver module.
+
+Package: rutorrent-plugin-ipad
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package allows rutorrent to work properly on ipad-like devices.
+
+Package: rutorrent-plugin-loginmgr
+Architecture: all
+Depends: rutorrent
+Recommends: php5-json, php5-cli
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides loginmgr plugin that allows to login to torrent sites
+ in cases where method based on stored cookies fails.
+
+Package: rutorrent-plugin-lookat
+Architecture: all
+Depends: rutorrent, php5-json
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides lookat plugin that allows to search for torrent name in
+ external sources.
+
+Package: rutorrent-plugin-mediainfo
+Architecture: all
+Depends: rutorrent, php5-json, rutorrent-plugin-task
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides mediainfo plugin that displays media file information.
+
+Package: rutorrent-plugin-noty
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides notification functionality for other plugins.
+
+Package: rutorrent-plugin-noty2
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides notification functionality for other plugins.
+
+Package: rutorrent-plugin-ratio
+Architecture: all
+Depends: rutorrent
+Recommends: php5-cli
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides ratio plugin that allows to manage ratio limits for a
+ group of torrents.
+
+Package: rutorrent-plugin-retrackers
+Architecture: all
+Depends: rutorrent, php5-cli
+Recommends: php5-json
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides retrackers plugin that appends user-defined trackers to
+ the trackers list of all newly added torrents.
+
+Package: rutorrent-plugin-rpc
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides RPC plugin that can be used as a replacement for web server's
+ mod_scgi support.
+
+Package: rutorrent-plugin-rss
+Architecture: all
+Depends: rutorrent, php5-json, php5-cli
+Recommends: curl
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides rss plugin that allows rutorrent to fetch torrents via
+ rss download links.
+
+Package: rutorrent-plugin-rssurlrewrite
+Architecture: all
+Depends: rutorrent, php5-json, rutorrent-plugin-rss
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides rssurlrewrite plugin that extends the functionality of
+ the rss plugin.
+
+Package: rutorrent-plugin-rutracker-check
+Architecture: all
+Depends: rutorrent, rutorrent-plugin-loginmgr, php5-cli
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides rutracker_check plugin that checks rutracker.org tracker
+ for updated or deleted torrents.
+
+Package: rutorrent-plugin-scheduler
+Architecture: all
+Depends: rutorrent, php5-cli
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides scheduler plugin that allows to define any of six
+ rtorrent behaviour types at each particular hour of 168 wee hours.
+
+Package: rutorrent-plugin-screenshots
+Architecture: all
+Depends: rutorrent, php5-json, rutorrent-plugin-task, ffmpeg
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides screenshots plugin that intends to show screenshots
+ from video files.
+
+Package: rutorrent-plugin-seedingtime
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides screenshots plugin that intends to show screenshots
+ from video files.
+
+Package: rutorrent-plugin-source
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides seedingtime plugin that adds the columns 'Finished' and
+ 'Added' to the torrents list.
+
+Package: rutorrent-plugin-task
+Architecture: all
+Depends: rutorrent, php5-json, rutorrent-plugin-task
+Recommends: procps
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides tasks plugin that allows running various scripts on the
+ host system.
+
+Package: rutorrent-plugin-theme
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides theme plugin that allows to change the UI theme to one
+ of several provided themes.
+
+Package: rutorrent-plugin-throttle
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides throttle plugin that gives a convenient control over
+ speed limits for groups of torrents.
+
+Package: rutorrent-plugin-wtorrent
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides show_peers_like_wtorrent plugin that changes the format
+ of values in columns 'Seeds' and 'Peers' in the torrents list.
+
+Package: rutorrent-plugin-tracklabels
+Architecture: all
+Depends: rutorrent
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides tracklabels plugin that adds tracker-based labels to the
+ category panel.
+
+Package: rutorrent-plugin-trafic
+Architecture: all
+Depends: rutorrent, php5-json, php5-cli
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides trafic plugin that allows to monitor rTorrent system
+ wide and per-tracker traffic totals.
+
+Package: rutorrent-plugin-unpack
+Architecture: all
+Depends: rutorrent, php5-cli, php5-json
+Recommends: unrar, unzip
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides unpack plugin that is designed to manually or
+ automatically unrar/unzip torrent data.
+
+Package: rutorrent-plugin-xmpp
+Architecture: all
+Depends: rutorrent, php5-cli
+Description: Web front-end for the popular Bittorrent client rTorrent
+ Package contains Web frontend for rtorrent written in PHP and JavaScript.
+ .
+ Main features are:
+  * Lightweight - it can be installed on old and low-end servers and even on
+    some SOHO routers.
+  * Extensible - there are several plugins and everybody can create his own one
+  * Nice look
+ .
+ This package provides xmpp plugin that sends notification through xmpp about
+ finished downloads.

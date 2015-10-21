@@ -1,0 +1,288 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          rutorrent
+# Required-Start:    $network $local_fs
+# X-Start-Before:    php5-fpm
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start/stop rtorrent and CGI daemons
+# Description:       Spawns rtorrent as background process using screen or
+#                    dtach. Spawns PHP-CGI as well if needed.
+### END INIT INFO
+
+# Author: Andriy Senkovych <jolly_roger@itblog.org.ua>
+
+# PATH should only include /usr/* if it runs after the mountnfs.sh script
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+# Default settings used without /etc/default/rutorrent file
+SPAWN_CGI=no
+PREFER_SCREEN=no
+NAME=rutorrent
+DESC="rutorrent services"
+SCRIPTNAME=/etc/init.d/rutorrent
+RUN_DIR=/var/run/rutorrent
+
+RTORRENT=/usr/bin/rtorrent
+RTORRENT_NAME=rtorrent
+RTORRENT_USER=rutorrent
+RTORRENT_GROUP=www-data # needs for web access
+RTORRENT_ARGS=""
+RTORRENT_PIDFILE=$RUN_DIR/rtorrent.pid
+RTORRENT_LISTEN=$RUN_DIR/rtorrent.sock
+
+PHP_CGI=/usr/bin/php5-cgi
+PHP_CGI_NAME=php5-cgi
+PHP_CGI_LISTEN=$RUN_DIR/php5-cgi.sock
+PHP_CGI_PIDFILE=$RUN_DIR/php5-cgi.pid
+
+SCREEN=/usr/bin/screen
+SCREEN_NAME=screen
+SCREEN_SESSION=$NAME
+SCREEN_ARGS="-d -m -U -S $SCREEN_SESSION"
+
+DTACH=/usr/bin/dtach
+DTACH_NAME=dtach
+DTACH_SOCKET=$RUN_DIR/dtach.sock
+DTACH_ARGS="-n $DTACH_SOCKET -Ez"
+
+
+# Exit if the package is not installed
+[ -x $DAEMON ] || exit 0
+
+# Read configuration variable file if it is present
+[ -r /etc/default/$NAME ] && . /etc/default/$NAME
+
+# Exit if disabled
+if [ x$ENABLED != xyes ] ; then
+    echo Script disabled in /etc/default/$NAME
+    exit 0
+fi
+
+# Calculate rtorrent and php5-cgi arguments
+if `echo $RTORRENT_LISTEN | grep -q '^\/' ` ; then
+    RTORRENT_ARGS="-o scgi_local=$RTORRENT_LISTEN $RTORRENT_OPTS"
+else
+    RTORRENT_ARGS="-o scgi_port=$RTORRENT_LISTEN $RTORRENT_OPTS"
+fi
+
+PHP_CGI_ARGS="-b $PHP_CGI_LISTEN"
+
+# Exit if no supported wrapper (screen or dtach) is installed
+[ -e $SCREEN -o -e $DTACH ] || exit 0
+
+# Select the most desirable wrapper
+WRAPPER=/nosuchfile
+if [ x$PREFER_SCREEN = "xyes" -o ! -e $DTACH -a -e $SCREEN ] ; then
+    WRAPPER=$SCREEN
+else
+    WRAPPER=$DTACH
+fi
+
+# Create $PID_DIR if not exist
+
+if [ ! -d $RUN_DIR -a ! -L $RUN_DIR ] ; then
+    mkdir $RUN_DIR
+    chown $RTORRENT_USER: $RUN_DIR
+fi
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
+. /lib/lsb/init-functions
+
+#
+# Functions that starts the daemon/service
+#
+# Return
+#   0 if daemon has been started
+#   1 if daemon was already running
+#   2 if daemon could not be started
+
+do_start_cgi() {
+    start-stop-daemon --start --quiet \
+        --pidfile $PHP_CGI_PIDFILE \
+        --name $PHP_CGI_NAME \
+        --user $RTORRENT_USER \
+        --exec $PHP_CGI --test > /dev/null \
+        || return 1
+    start-stop-daemon --start --quiet \
+        --background --make-pidfile --oknodo\
+        --pidfile $PHP_CGI_PIDFILE \
+        --chuid $RTORRENT_USER \
+        --exec $PHP_CGI -- $PHP_CGI_ARGS \
+        || return 2
+}
+
+do_start_screen() {
+    start-stop-daemon --start --quiet \
+        --pidfile $RTORRENT_PIDFILE \
+        --name $SCREEN_NAME \
+        --user $RTORRENT_USER \
+        --exec $SCREEN --test > /dev/null \
+        || return 1
+    start-stop-daemon --start --quiet --oknodo \
+        --chuid $RTORRENT_USER \
+        --group $RTORRENT_GROUP \
+        --exec $SCREEN -- $SCREEN_ARGS $RTORRENT $RTORRENT_ARGS \
+        || return 2
+}
+
+do_start_dtach() {
+    # Creating pidfile is useless for dtach because dtach forks itself and changes its PID
+    start-stop-daemon --start --quiet \
+        --name $DTACH_NAME \
+        --user $RTORRENT_USER \
+        --exec $DTACH --test > /dev/null \
+        || return 1
+    start-stop-daemon --start --quiet --oknodo \
+        --chuid $RTORRENT_USER \
+        --group $RTORRENT_GROUP \
+        --exec $DTACH -- $DTACH_ARGS $RTORRENT $RTORRENT_ARGS\
+        || return 2
+}
+
+
+#
+# Functions that stops the daemon/service
+#
+# Return
+#   0 if daemon has been stopped
+#   1 if daemon was already stopped
+#   2 if daemon could not be stopped
+#   other if a failure occurred
+
+do_stop_cgi() {
+    start-stop-daemon --stop --quiet --oknodo \
+        --retry=TERM/30/KILL/5 \
+        --user $RTORRENT_USER \
+        --pidfile $PHP_CGI_PIDFILE \
+        --name $PHP_CGI_NAME
+    RETVAL="$?"
+    [ "$RETVAL" = 2 ] && return 2
+    start-stop-daemon --stop --quiet --oknodo \
+        --retry=0/30/KILL/5 \
+        --user $RTORRENT_USER \
+        --pidfile $PHP_CGI_PIDFILE \
+        --name $PHP_CGI_NAME \
+        --exec $PHP_CGI
+    [ "$?" = 2 ] && return 2
+    # Many daemons don't delete their pidfiles when they exit.
+    rm -f "$PHP_CGI_PIDFILE" "$PHP_CGI_LISTEN"
+    return "$RETVAL"
+}
+
+do_stop_screen() {
+    start-stop-daemon --stop --quiet --oknodo \
+        --retry=TERM/30/KILL/5 \
+        --user $RTORRENT_USER \
+        --name $RTORRENT_NAME \
+        --exec $RTORRENT
+    RETVAL="$?"
+    [ "$RETVAL" = 2 ] && return 2
+    start-stop-daemon --stop --quiet --oknodo \
+        --retry=0/30/KILL/5 \
+        --user $RTORRENT_USER \
+        --name $RTORRENT_NAME \
+        --exec $RTORRENT
+    [ "$?" = 2 ] && return 2
+    # Many daemons don't delete their pidfiles when they exit.
+    rm -f "$RTORRENT_PIDFILE" "$RTORRENT_LISTEN"
+    return "$RETVAL"
+}
+
+do_stop_dtach() {
+    start-stop-daemon --stop --quiet --oknodo \
+        --retry=TERM/30/KILL/5 \
+        --user $RTORRENT_USER \
+        --name $RTORRENT_NAME \
+        --exec $RTORRENT
+    RETVAL="$?"
+    [ "$RETVAL" = 2 ] && return 2
+    start-stop-daemon --stop --quiet --oknodo \
+        --retry=0/30/KILL/5 \
+        --user $RTORRENT_USER \
+        --name $RTORRENT_NAME \
+        --exec $RTORRENT
+    [ "$?" = 2 ] && return 2
+    # Many daemons don't delete their pidfiles when they exit.
+    rm -f "$RTORRENT_PIDFILE" "$RTORRENT_LISTEN" "$DTACH_SOCKET"
+    return "$RETVAL"
+}
+
+
+do_start() {
+    case "$WRAPPER" in
+        $DTACH)
+            log_progress_msg $DTACH_NAME
+            do_start_dtach
+            log_end_msg $?
+            ;;
+        $SCREEN)
+            log_progress_msg $SCREEN_NAME
+            do_start_screen
+            log_end_msg $?
+            ;;
+    esac
+
+    if `echo $RTORRENT_LISTEN | grep -q '^\/' ` ; then
+        sleep 2
+        chmod 660 $RTORRENT_LISTEN
+    fi
+
+    if [ x$SPAWN_CGI = "xyes" ] ; then
+        log_progress_msg $PHP_CGI_NAME
+        do_start_cgi
+        log_end_msg $?
+    fi
+}
+
+do_stop()
+{
+    case "$WRAPPER" in
+        $DTACH)
+            log_progress_msg $DTACH_NAME
+            do_stop_dtach
+            log_end_msg $?
+            ;;
+        $SCREEN)
+            log_progress_msg $SCREEN_NAME
+            do_stop_screen
+            log_end_msg $?
+            ;;
+    esac
+
+    if [ x$SPAWN_CGI = "xyes" ] ; then
+        log_progress_msg $PHP_CGI_NAME
+        do_stop_cgi
+        log_end_msg $?
+    fi
+}
+
+case "$1" in
+  start)
+    [ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC " "$NAME"
+    do_start
+  ;;
+  stop)
+    [ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+    do_stop
+    ;;
+  status)
+       status_of_proc "$RTORRENT" "$NAME" && exit 0 || exit $?
+       ;;
+  restart|force-reload)
+    log_daemon_msg "Restarting $DESC" "$NAME"
+    do_stop
+    do_start
+       ;;
+  *)
+    echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload}" >&2
+    exit 3
+    ;;
+esac
+
+:

@@ -1,0 +1,41 @@
+# Defaults for rutorrent initscript
+# sourced by /etc/init.d/rutorrent
+# installed at /etc/default/rutorrent by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# Set to 'yes' to start to enable.
+ENABLED=no
+
+# Preferred screen over dtach. If only one is available then this variable
+# does nothing.
+# Default value is no
+#PREFER_SCREEN=yes
+
+# Start PHP-CGI to process PHP requests. Should be set to 'yes' if no other
+# method of running PHP code (like php-fpm of apache's mod_php) is applied.
+# Default value is no
+#SPAWN_CGI=yes
+
+# Bind PHP-CGI option describes where php5-cgi will accept incoming
+# connections. Can be set to socket filename or host:port. It is recommended
+# not to use hostnames for IPv6-enabled hosts because php5-cgi will not start
+# due to multiple arresses on one hostname.
+# Default value is /var/run/rutorrent/php5-cgi.sock
+#PHP_CGI_LISTEN=127.0.0.1:5000
+
+# Set user to run rtorrent from. This user will be used to spawn php-cgi
+# process as well. One may want to set this value to his own unprivileged user
+# to be able to manipulate on downloaded files.
+# Default value is rutorrent
+#RTORRENT_USER=rutorrent
+
+# This variable desribes how rtorrent will accept SCGI connections. Note that
+# rtorrent does not accept IPv6 addresses.
+# Default value is /var/run/rutorrent/rtorrent.sock
+#RTORRENT_LISTEN=127.0.0.1:5001
+
+# Additional options that are passed to rtorrent.
+#RTORRENT_OPTS="-o upload_rate=100,download_rate=500"

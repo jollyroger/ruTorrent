@@ -1,0 +1,12 @@
+conf/config.php /etc/rutorrent
+conf/access.ini /etc/rutorrent
+conf/plugins.ini /etc/rutorrent
+debian/examples/rtorrent.rc /etc/rutorrent
+css /usr/share/rutorrent
+images /usr/share/rutorrent
+js /usr/share/rutorrent
+lang /usr/share/rutorrent
+php /usr/share/rutorrent
+share /var/lib/rutorrent
+index.html /usr/share/rutorrent
+debian/examples /usr/share/doc/rutorrent
